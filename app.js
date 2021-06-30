@@ -20,10 +20,10 @@ app.use(passport.session())
 require("./config/passport")(passport)
 
 
-mongoose.connect(db, { useUnifiedTopology: true }).then(() => {
+mongoose.connect(db, { useNewUrlParser: true }).then(() => {
 	console.log('数据库链接成功')
 }).catch(e => {
-	console.log(e)
+	console.log(e,'错误')
 })
 
 

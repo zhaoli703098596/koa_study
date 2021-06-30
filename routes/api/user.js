@@ -14,6 +14,8 @@ const User = require('../../models/User')
 const Keys = require('../../config/key')
 //引入验证
 const validateRegisterInput=require('../../validation/register')
+const validateLoginInput=require('../../validation/login')
+
 
 
 /**
@@ -71,6 +73,14 @@ router.post("/register", async ctx => {
 
 router.post("/login", async ctx => {
 	console.log(ctx.request.body)
+	const {errors,isValid}=validateLoginInput(ctx.request.body)
+
+		//判断是否通过
+		if(!isValid){
+			ctx.status = 400;
+			ctx.body = errors
+			return
+		}
 	const findResult = await User.find({ email: ctx.request.body.email })
 	const password = ctx.request.body.password
 	if (findResult.length == 0) {
