@@ -11,6 +11,8 @@ const passport = require('koa-passport')
 
 //引入
 const user = require('./routes/api/user')
+const profile = require('./routes/api/profile')
+
 
 app.use(bodyParser())
 app.use(passport.initialize())
@@ -37,6 +39,8 @@ router.get('/', async ctx => {
 
 //配置路由地址
 router.use("/api/user", user)
+router.use("/api/profile", profile)
+
 
 
 //路由
